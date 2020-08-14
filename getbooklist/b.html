@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Portfolio</title>
+	<meta charset="utf-8">
+	 <link rel="stylesheet" type="text/css" href="style.css">   
+
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class='image' >
+	<img 
+	width="300"
+	height="300"
+	id="profileImage"
+	></div>
+	<div class="header">
+	<h2 id="fullName"></h2>
+	<p> Currenty studing <span>Bachelor Degree</span> in computer science and information technology.</p>
+</div>
+	
+	<div class="info">
+	<h3>Github_Bio : <a id="bio"></a></h3>
+	<h3>My Address:<a id="address"></a></h3>	
+	</div>
+
+	<div class="repoInfo">
+            <h3>
+              My github repositories:
+              <a id="reponumber"></a><br />
+              <a id="repolist"></a>
+            </h3>
+	</div>
+	<div class='glink'>
+	<p>Check me on <a id="githublink">Github</a></p>
+</div>
+</div>
+
+<script >
+	fetch("https://api.github.com/users/prajapatimina")
+	.then(response=>response.json())
+	.then(function(data){
+		console.log(data)
+		document.getElementById("profileImage").src=data['avatar_url']
+		document.getElementById("fullName").textContent=data['name']
+		document.getElementById("bio").textContent=data['bio']
+		document.getElementById("address").textContent=data['location']
+
+		document.getElementById("githublink").href=data['html_url']
+	
+	})
+	
+	fetch("https://api.github.com/users/prajapatimina/repos")
+        .then((response) => response.json())
+        .then(function (data) {
+          console.log(data);
+          document.getElementById("reponumber").textContent = data["length"];
+
+        /*  for (var i = 0; i < data.length; i++) {
+            console.log(data[i].url);
+            urls = data[i].html_url;
+            var li = document.createElement("li");
+            li.innerHTML = "<a href=" + urls + ">" + data[i].name + "</a>";
+            document.getElementById("repolist").appendChild(li); */
+
+    var out = "";
+  var i;
+  out +='<table border="2"><tr><th>Name of Repo</th><th>Language</th><th>Description</th><th>updated_at</th></tr>';
+  for(i = 0; i < data.length; i++) {
+    out +='<tr><td>';
+    out += '<a href="' + data[i].html_url + '">' + 
+    data[i].name + '</a></td>';
+    out += '<td>'+data[i].language+'</td><td>'+data[i].description+'</td><td>'+data[i].updated_at+'</td>';
+    out +='</tr>';
+  }
+  out += '</table>';
+  document.getElementById("repolist").innerHTML = out;
+
+          });	
+
+
+	
+	
+
+</script>
+</body>
+</html>

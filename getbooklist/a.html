@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="id01"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "https://api.github.com/users/prajapatimina/repos";
+
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myArr = JSON.parse(this.responseText);
+    myFunction(myArr);
+  }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+  var out = "";
+  var i;
+  out +='<table border="2"><tr><th>Name of Repo</th><th>Language</th><th>Description</th><th>updated_at</th></tr>';
+  for(i = 0; i < arr.length; i++) {
+    out +='<tr><td>';
+    out += '<a href="' + arr[i].html_url + '">' + 
+    arr[i].name + '</a></td>';
+    out += '<td>'+arr[i].language+'</td><td>'+arr[i].description+'</td><td>'+arr[i].updated_at+'</td>';
+    out +='</tr>';
+  }
+  out += '</table>';
+  document.getElementById("id01").innerHTML = out;
+}
+</script>
+
+</body>
+</html>

@@ -23,15 +23,12 @@ if (!empty($_FILES)) {
                 // make error flag true
                 echo json_encode(array('status'=>'fail', 'message'=>'could not move file'));
             }   
-                if($flag == 0){
-                    insertMainImage($newname,$pid);
-                    $flag = 1;
-                }
+                
                 resizeImage($target_path.$newname, $target_path.$newname);
                 //compressImage($_FILES['image'.$x]['tmp_name'], $target_path.$newname, 60);
-                $link = '/LibMS/upload-files/uploads/'.$pid.'/'.$newname;
+                $link = '/LibMS/upload-stdphoto/uploads/'.$pid.'/'.$newname;
                 $link = mysqli_real_escape_string($conn, $link);
-                $sql = "INSERT INTO product_images (image_name, pid)VALUES('$link',$pid)";
+                $sql = "UPDATE students SET photo='$link' WHERE sid='$pid'";
                 if(mysqli_query($conn,$sql)){
 
                 }

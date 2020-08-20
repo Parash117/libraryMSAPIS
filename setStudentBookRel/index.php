@@ -1,7 +1,7 @@
 <?php
   include('../dbconnection.php');
 
-  if(isset($_POST["username"])){
+  if(isset($_POST['pid'])){
       $pid = $_POST['pid'];
       $sid = $_POST['sid'];
       $dateoflend = date();

@@ -5,7 +5,6 @@
       $pid = $_POST['pid'];
       $sid = $_POST['sid'];
       $dateoflend = date("Y-m-d");
-      //fullname,countryname,email,address,gender,username,password,dob_text,phoneno
       $sql = "INSERT INTO student_book_rel (pid, sid, dateoflend)VALUES('$pid','$sid','$dateoflend')";
 
       if(mysqli_query($conn, $sql)){

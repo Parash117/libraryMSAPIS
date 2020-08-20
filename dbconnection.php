@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "santos";
+$password = "MysqlkoPass.99";
 $dbname = "libms";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);

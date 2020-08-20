@@ -1,11 +1,11 @@
 <?php
 	include('../dbconnection.php');
 
-	sid = $_GET["sid"];
+	$sid = $_GET["keyword"];
 	//increaseView(sid);
 	//creating a query
 	$smt = $conn->prepare("SELECT sid, name, facultyid, phoneno, email, semesterid, photo FROM students
-		WHERE sid = 'sid'");
+		WHERE sid = '$sid'");
 	//executing the query
 	$smt->execute();
 	//binding results to the query
